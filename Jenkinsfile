@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker { image 'node:20.18.0-alpine3.20'
-        args '-p 3000:3000' }
+        args '-p 4173:4173' }
     }
     stages {
         stage('Preparation') {
@@ -14,6 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Test') {
@@ -29,6 +30,12 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
+        }
+    }
+    post {
+        always {
+            // Clean up the workspace after execution
+            cleanWs()
         }
     }
 }
