@@ -23,13 +23,13 @@ pipeline {
             steps {
                 sh 'chmod +x start.sh'
                 sh './start.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'chmod +x kill.sh'
-                sh './kill.sh'
             }
         }
         stage('Clean') {
             steps {
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'chmod +x kill.sh'
+                sh './kill.sh'
                 echo 'Cleaning....'
             }
         }
