@@ -28,9 +28,9 @@ pipeline {
                 sh './kill.sh'
             }
         }
-        stage('Deploy') {
+        stage('Clean') {
             steps {
-                echo 'Deploying....'
+                echo 'Cleaning....'
             }
         }
     }
