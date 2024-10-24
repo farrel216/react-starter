@@ -1,6 +1,7 @@
 pipeline {
     agent {
-        docker { image 'node:20.18.0-alpine3.20' }
+        docker { image 'node:20.18.0-alpine3.20'
+        args '-p 3000:3000' }
     }
     stages {
         stage('Preparation') {
