@@ -1,14 +1,27 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:20.18.0-alpine3.20' }
+    }
     stages {
+        stage('Preparation') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+                sh 'ls -l'
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh 'chmod +x start.sh'
+                sh './start.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'chmod +x kill.sh'
+                sh './kill.sh'
             }
         }
         stage('Deploy') {
